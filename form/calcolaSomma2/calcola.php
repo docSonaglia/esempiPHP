@@ -4,51 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stile.css">
-    <title>Risultato Calcolo</title>
+    <title>Calcola Somma</title>
+    <style>
+        /* Piccolo aggiustamento inline per il layout quando necessario: non tocca il file stile.css */
+        #container-calcolo { max-width:520px; margin:28px auto; padding:18px; }
+    </style>
 </head>
 <body>
 <?php
-// Legge i valori inviati via POST e calcola la somma
+// File autosufficiente: mostra il form e, dopo submit, mostra il risultato.
 $error = '';
 $result = null;
+$num1_val = '';
+$num2_val = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Uso filter_input per sicurezza e validazione di base
-    $n1 = filter_input(INPUT_POST, 'num1', FILTER_VALIDATE_FLOAT);
-    $n2 = filter_input(INPUT_POST, 'num2', FILTER_VALIDATE_FLOAT);
+    // Prendo i valori raw per poterli ripopolare nel form
+    $num1_val = isset($_POST['num1']) ? trim($_POST['num1']) : '';
+    $num2_val = isset($_POST['num2']) ? trim($_POST['num2']) : '';
 
-    if ($n1 === null || $n1 === false) {
+    // Uso filter_var per validare i numeri (accetta anche numeri con virgola)
+    $n1 = filter_var(str_replace(',', '.', $num1_val), FILTER_VALIDATE_FLOAT);
+    $n2 = filter_var(str_replace(',', '.', $num2_val), FILTER_VALIDATE_FLOAT);
+
+    if ($n1 === false || $num1_val === '') {
         $error = 'Valore A non valido. Inserisci un numero.';
-    } elseif ($n2 === null || $n2 === false) {
+    } elseif ($n2 === false || $num2_val === '') {
         $error = 'Valore B non valido. Inserisci un numero.';
     } else {
-        // Calcolo la somma con precisione ragionevole
         $sum = $n1 + $n2;
-        // Formatto il risultato mostrando massimo 2 decimali quando necessario
         if (floor($sum) == $sum) {
             $result = number_format($sum, 0, '.', '');
         } else {
             $result = rtrim(rtrim(number_format($sum, 6, '.', ''), '0'), '.');
         }
     }
-} else {
-    $error = 'Nessun dato ricevuto. Usa il form per inviare due numeri.';
 }
 ?>
 
     <div id="container-calcolo">
-        <h1>Risultato Somma</h1>
+        <h1>Calcola Somma</h1>
 
         <?php if ($error): ?>
             <div class="error" role="alert"><?=htmlspecialchars($error)?></div>
-        <?php else: ?>
-            <div class="result" role="status">
+        <?php endif; ?>
+
+        <form action="<?=htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" novalidate>
+            <div class="field">
+                <label for="num1">Numero A</label>
+                <input type="number" id="num1" name="num1" value="<?=htmlspecialchars($num1_val)?>" inputmode="decimal" required>
+            </div>
+
+            <div class="field">
+                <label for="num2">Numero B</label>
+                <input type="number" id="num2" name="num2" value="<?=htmlspecialchars($num2_val)?>" inputmode="decimal" required>
+            </div>
+
+            <div class="actions">
+                <button type="submit">Calcola</button>
+            </div>
+        </form>
+
+        <?php if ($result !== null && $error === ''): ?>
+            <div class="result" role="status" style="margin-top:16px;">
                 <strong>Somma:</strong> <?=htmlspecialchars($result)?>
             </div>
         <?php endif; ?>
 
         <p style="margin-top:14px;">
-            <a href="calcola.html" style="color:var(--accent); text-decoration:none; font-weight:600;">&larr; Torna al form</a>
+            <a href="../calcolaSomma/calcola.html" style="color:var(--accent); text-decoration:none; font-weight:600;">&larr; Apri la versione HTML</a>
         </p>
     </div>
 
