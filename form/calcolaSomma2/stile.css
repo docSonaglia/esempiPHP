@@ -1,0 +1,126 @@
+/* Stile per calcola.html - Calcola */
+:root{
+	--bg:#f6f7fb;
+	--card:#ffffff;
+	--accent:#0077cc;
+	--accent-strong:#005fa3;
+	--muted:#6b7280;
+	--success:#16a34a;
+	--danger:#dc2626;
+	--radius:10px;
+	--shadow: 0 6px 20px rgba(16,24,40,0.06);
+	--max-width:420px;
+	font-size:16px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	margin:0;
+	font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	background:linear-gradient(180deg,#eef2ff 0%, var(--bg) 100%);
+	color:#0f172a;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	padding:40px 16px;
+}
+
+#container-calcolo{
+	width:100%;
+	max-width:var(--max-width);
+	background:var(--card);
+	border-radius:var(--radius);
+	box-shadow:var(--shadow);
+	padding:28px 26px;
+	border:1px solid rgba(15,23,42,0.04);
+}
+
+#container-calcolo h1{
+	margin:0 0 18px 0;
+	font-size:1.25rem;
+	letter-spacing:0.2px;
+	color:#08132a;
+}
+
+form{
+	display:grid;
+	gap:12px;
+}
+
+label{
+	display:block;
+	font-size:0.9rem;
+	color:var(--muted);
+	margin-bottom:6px;
+}
+
+input[type="number"], input[type="text"], input[type="email"], select, textarea{
+	width:100%;
+	padding:10px 12px;
+	border:1px solid rgba(15,23,42,0.08);
+	border-radius:8px;
+	background:#fbfdff;
+	font-size:1rem;
+	transition:box-shadow .12s ease, border-color .12s ease, transform .06s ease;
+}
+
+input[type="number"]:focus{
+	outline:none;
+	border-color:var(--accent);
+	box-shadow:0 6px 18px rgba(0,119,204,0.08);
+	transform:translateY(-1px);
+}
+
+button[type="submit"]{
+	appearance:none;
+	-webkit-appearance:none;
+	background:linear-gradient(180deg,var(--accent),var(--accent-strong));
+	color:white;
+	border:0;
+	padding:10px 14px;
+	font-size:1rem;
+	border-radius:8px;
+	cursor:pointer;
+	transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+button[type="submit"]:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,119,204,0.12)}
+button[type="submit"]:active{transform:translateY(0)}
+
+/* piccolo layout per separazione tra label e input usando <br> in HTML */
+form br{display:none}
+
+/* responsive */
+@media (max-width:480px){
+	:root{font-size:15px}
+	#container-calcolo{padding:20px}
+}
+
+/* Stato a11y e messaggi */
+.result{
+	margin-top:8px;
+	padding:10px 12px;
+	border-radius:8px;
+	background:#f8faf5;
+	color:var(--success);
+	border:1px solid rgba(22,163,74,0.08);
+}
+.error{
+	color:var(--danger);
+	background:#fff5f5;
+	border:1px solid rgba(220,38,38,0.08);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme:dark){
+	:root{--bg:#071023; --card:#071428; --muted:#9ca3af; --accent:#4aa3ff}
+	body{background:linear-gradient(180deg,#020617,#071023); color:#e6eef8}
+	#container-calcolo{border-color:rgba(255,255,255,0.04); box-shadow:none}
+	input[type="number"]{background:#081022; border-color:rgba(255,255,255,0.06); color:#e6eef8}
+	input[type="number"]:focus{box-shadow:0 6px 18px rgba(74,163,255,0.06)}
+	button[type="submit"]{background:linear-gradient(180deg,#2b8cff,#0b6dd8)}
+}
+
