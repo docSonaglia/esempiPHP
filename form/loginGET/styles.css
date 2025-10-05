@@ -1,0 +1,40 @@
+/* Simple external stylesheet for the login example */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f8fb;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 420px;
+  margin: 60px auto;
+  background: #fff;
+  border: 1px solid #e1e4e8;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+h1 { font-size: 20px; margin: 0 0 12px 0; }
+label { display: block; margin: 10px 0 6px; font-weight: bold; }
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccd0d6;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type="submit"] {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #2b7cff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type="submit"]:hover { background: #246fe0; }
+.message { padding: 10px; margin-top: 12px; border-radius: 4px; }
+.success { background: #e6ffed; border: 1px solid #b7f0c7; color: #0b6b2f; }
+.error { background: #fff1f0; border: 1px solid #f0b7b7; color: #7a1b1b; }
+.note { font-size: 13px; color: #666; margin-top: 10px; }
+.download-link { display: inline-block; margin-top: 12px; }
