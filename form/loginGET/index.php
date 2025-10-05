@@ -76,7 +76,7 @@ if (isset($_GET['username']) && isset($_GET['password'])) {
       </form>
     <?php endif; ?>
 
-    <p class="note">Nota: Le credenziali sono memorizzate in chiaro nel file <code>credentials.txt</code> per scopi didattici.</p>
+    <p class="note">Nota: Usa wireshark per analizzare il file <a href="./analizzami.pcap">analizzami.pcap</a></a></p>
   </div>
 </body>
 </html>
